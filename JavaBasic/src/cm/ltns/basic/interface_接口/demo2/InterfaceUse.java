@@ -1,4 +1,4 @@
-package cm.ltns.basic.interface_.demo2;
+package cm.ltns.basic.interface_接口.demo2;
 
 /**
  * 简单的接口示例：

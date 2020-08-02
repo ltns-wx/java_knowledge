@@ -1,4 +1,4 @@
-package cm.ltns.basic.extend_.Demo1;
+package cm.ltns.basic.extend_.继承;
 
 /**
  * Employee中的字段：

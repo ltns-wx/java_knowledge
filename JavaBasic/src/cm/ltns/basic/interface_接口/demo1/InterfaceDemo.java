@@ -1,4 +1,4 @@
-package cm.ltns.basic.interface_.demo1;
+package cm.ltns.basic.interface_接口.demo1;
 
 /**
  *
