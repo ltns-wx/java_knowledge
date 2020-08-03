@@ -10,7 +10,7 @@ public class Employee {
     public final String birthday = "birthday";
 
     public Employee(){
-        System.out.println("Employee 的无惨构造函数");
+        System.out.println("Employee 的无惨构造函数2");
     }
 
     public static void eat() {
