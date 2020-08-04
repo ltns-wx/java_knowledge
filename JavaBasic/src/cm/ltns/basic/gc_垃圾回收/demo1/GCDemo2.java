@@ -28,10 +28,10 @@ public class GCDemo2 {
     public static void main(String[] args) {
         // 创建一个字符串对象
         String str = new String ("好久不见");
-        // 创建一个弱引用
-        WeakReference wr = new WeakReference(str);
+        // 创建一个弱引用（ “好久不见”其实就是一个对象 ）
+        WeakReference wr = new WeakReference(str);  //“好久不见”对象给一个弱引用
 
-        //切断str引用和“好久不见”字符串之间的引用
+        //切断str引用和“好久不见”字符串之间的引用，保证“好久不见”只有一个弱引用
         str = null;
         //取出弱引用所引用的对象
         System.out.println(wr.get());

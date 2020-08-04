@@ -3,11 +3,11 @@ package cm.ltns.basic.gc_垃圾回收.demo1;
 /**
  * 垃圾回收
  * 一、垃圾回收特征：
- *      1.垃圾回收机制只负责回收堆内存的对象，不会回收任何物力资源（例如数据库连接和网络IO等资源）
+ *      1.垃圾回收机制只负责回收堆内存的对象，不会回收任何物理资源（例如数据库连接和网络IO等资源）
  *      2.程序无法精确控制垃圾回收的运行
  *      3.在垃圾回收机制回收任何对象之前，都会调用改对象的finalize()方法，该方法可能会让对象复活
  *
- * 二、对象再内存中的状态
+ * 二、对象在内存中的状态
  *      1.可到达状态
  *      2.可恢复状态
  *      3.不可达状态
@@ -49,8 +49,6 @@ public class GcDemo extends Object{
     }
 
     public void finalize(){
-        System.out.println("清理之前" + this);
         System.out.println("系统正在清理GcDemo对象");
-        System.out.println("清理之后：" + this);
     }
 }

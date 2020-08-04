@@ -1,5 +1,8 @@
 package cm.ltns.basic.enum_枚举;
 
+/**
+ * 枚举继承问题：-
+ */
 // 性别枚举
 public enum Gender implements GenderDesc {
 
