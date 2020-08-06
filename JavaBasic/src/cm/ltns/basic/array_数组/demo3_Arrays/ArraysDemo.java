@@ -1,8 +1,6 @@
 package cm.ltns.basic.array_数组.demo3_Arrays;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * 一、Arrays 类的使用 ：该类包含用于操作数组的各种方法（如排序和搜索）。该类还包含一个静态工厂，可以将数组视为列表
@@ -47,21 +45,42 @@ public class ArraysDemo {
     }
 
     /**
-     * 相同的可变参数变成列表（List）
+     * 相同的可变参数变成列表（List），这里面的List并不是ArrayList，而是Arrays的内部类.
+     *
+     *
+     *
      */
     public static void asList() {
         // 相同类型的可变参数
         List<Integer> ints = Arrays.asList(1, 2, 3, 4);
-        System.out.println(ints);
+        System.out.println(ints); //[1,2,3,4]
 
-        // 相同类型的数组
+        /**
+         * 这个地方会把int[] arr当做整个对象，
+         * 原因： asList 的方法：public static <T> List<T> asList(T... a)
+         *        T 泛型应该是一个Object，所以，他会把int[] arr当做一个对象，
+         *        相比String[] strings， 这个T的类型就是String。
+         */
         int[] arr = new int[]{1, 2, 3, 4};
-        List<int[]> ints1 = Arrays.asList(arr);
+        List<int[]> ints1 = Arrays.asList(arr); // 这个会把int[] arr 当做整个对象
         System.out.println(ints1);
 
         String[] str = {"张三", "李四", "王五", "宋六", "赵七", "朱八", "何九", "田十"};
         List<String> list = Arrays.asList(str);//将数组转换为list集合
         System.out.println(list);
+    }
+
+    /**
+     * 自定义方法：把数组转成ArrayList
+     */
+    public static void asArrayList(){
+        String [] strings = {"a","b","c","d"};
+        // 方法一
+        ArrayList<String> stringList = new ArrayList<String>(Arrays.asList(strings));
+
+        // 方式二、
+        List<String> list = new ArrayList<String>(strings.length);
+        Collections.addAll(list, strings);
     }
 
     /**
