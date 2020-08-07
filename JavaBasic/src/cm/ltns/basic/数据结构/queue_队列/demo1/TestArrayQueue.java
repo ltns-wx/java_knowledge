@@ -1,12 +1,22 @@
-package cm.ltns.basic.数据结构.demo1;
+package cm.ltns.basic.数据结构.queue_队列.demo1;
 
 import java.lang.reflect.Array;
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 /**
  * 队列（Queue）
  *  特点：先进先出
+ *
+ *  队列的操作
+ *      1.初始化
+ *      2.入队
+ *      3.出队
+ *      4.获取队头
+ *      5.求长度
+ *      6.判断队列是否为空
+ *      7.正序遍历
+ *      8.销毁
+ *
  */
 public class TestArrayQueue {
 
@@ -54,7 +64,8 @@ public class TestArrayQueue {
 }
 
 /**
- * 使用数组实现队列
+ * 使用数组实现队列：
+ *      头指针始终指向队列头元素的前一个位置，尾指针始终指向队列尾元素的位置
  */
 class ArrayQueue<T> {  // 使用泛型
     // 数组的最大值
