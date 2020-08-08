@@ -1,7 +1,5 @@
 package cm.ltns.basic.泛型.泛型派生子类;
 
-import cm.ltns.basic.泛型.泛型类.Apple;
-
 import java.util.ArrayList;
 import java.util.List;
 

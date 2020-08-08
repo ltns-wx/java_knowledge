@@ -1,4 +1,4 @@
-package cm.ltns.principle.SingleResponsibility;
+package cm.ltns.structure.principle.SingleResponsibility;
 
 /**
  * 单一职责原则:
