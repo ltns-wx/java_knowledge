@@ -1,6 +1,7 @@
 package cm.ltns.basic.数据结构.queue_队列.demo1;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -83,6 +84,7 @@ class ArrayQueue<T> {  // 使用泛型
         // java中不允许创建带泛型的数组类，详情请参考泛型章节。
         // t = new T[maxsize];
         t = (T[]) Array.newInstance(clz, maxsize);
+        // 为什么初始化为-1？ 因为指针值得为之已经有数据了
         this.front = -1; // 指向队列头部，分析出front是指向队列头的前一个位置.（出栈所用）
         this.rear = -1; // 指向队列尾，指向队列尾的数据(即就是队列最后一个数据)（入栈所用）
     }
