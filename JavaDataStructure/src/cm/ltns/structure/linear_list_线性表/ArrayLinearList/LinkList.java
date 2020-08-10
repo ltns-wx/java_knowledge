@@ -1,5 +1,7 @@
 package cm.ltns.structure.linear_list_线性表.ArrayLinearList;
 
+import java.util.Currency;
+
 public class LinkList<T> {
     //头指针
     private Node<T> head;
@@ -22,12 +24,12 @@ public class LinkList<T> {
      * 插入一个元素：是指在post-1位置和pos位置中间插入一个新的元素
      * 一、首先判断位置的合法性
      * 二、找n-1位置上的元素
-     * 三、n-1的节点的next = 该节点、 该节点的next就是next-1节点的next
+     * 三、n-1的节点的next = 新增加节点、 该节点的next就是next-1节点的next
      * <p>
      * head--->a--->b---->c--->d
      */
     public boolean add(T t, int pos) {
-        if (pos < length && pos > 1) {
+        if (pos < length + 1 && pos > 1) {
             System.out.println("索引越界");
             return false;
         }
@@ -39,41 +41,103 @@ public class LinkList<T> {
         Node<T> q = head.next;
         while (num < pos) {
             p = q;
-            q = q.next;
+            q = p.next;
             num++;
         }
         p.next = new Node<T>(t, q);
+        length ++ ;
         return true;
     }
 
-    // 删除指定位置上的元素
+
+    /**
+     * 删除一个索引的节点
+     *  1.找到上一个节点的next对象
+     *  2.找到下一个节点的Note对象
+     */
     public boolean remove(int pos) {
+        if (pos > length + 1 && pos < 1) {
+            System.out.println("下标索引越界");
+            return false;
+        }
+        int cur = 1;
+        Node<T> p = head;
+        Node<T> q = head.next;
+        while (cur < pos) {
+            p = q;
+            q = p.next;
+            cur++;
+        }
+        p.setNext(p.next);
         return false;
     }
 
     // 获取指定位置上的元素
     public T value(int pos) {
-        return null;
+        if (isEmpty()){
+            System.out.println("链表为null");
+            return null;
+        }
+        if (pos < 1 && pos > length + 1) {
+            System.out.println("下标索引越界");
+            return null;
+        }
+        int cur = 1;
+        Node<T> p = head;
+        Node<T> q = head.next;
+        // 获取指定位置上的元素
+        while (cur < pos) {
+            p = q;
+            q = p.next;
+            cur++;
+        }
+        return q.getData();
     }
 
-    // 获取某个节点的位置
+    // 获取某个节点的位置： head--->a--->b---->c--->d
     public int find(T t) {
-        return 0;
+        if (isEmpty()){
+            System.out.println("链表为null");
+            return -1;
+        }
+        int cur= 1;
+        Node<T> p = head;
+        while(cur <= length){
+            p = p.next;
+            if (p.getData().equals(t)){
+                return cur;
+            }
+            cur ++ ;
+        }
+        return -1;
     }
 
     // 更新链表中的某个节点
-    public boolean modify() {
+    public boolean modify(int pos, T t) {
+        if (isEmpty()){
+            System.out.println("链表为null");
+            return false;
+        }
+        if (pos < 1 && pos > length + 1) {
+            System.out.println("下标索引越界");
+            return false;
+        }
+        int num = 1;
+
         return false;
     }
 
     // 判断是否为空
     public boolean isEmpty() {
+        if (length == 0){
+            return true;
+        }
         return false;
     }
 
     // 长度
     public int size() {
-        return 0;
+        return length;
     }
 
     // 打印所有元素
@@ -96,11 +160,20 @@ public class LinkList<T> {
 
     public static void main(String[] args) {
         LinkList<String> linkList = new LinkList<>();
-        linkList.add("a",1);
-        linkList.add("b",2);
-        linkList.add("c",3);
-        linkList.add("d",2);
+        linkList.add("a", 1);
+        linkList.add("b", 2);
+        linkList.add("c", 3);
+        linkList.add("d", 2);
+        System.out.println("获取位置3的元素：" + linkList.value(3));
         linkList.nextOrder();
+        System.out.println("---移除---");
+        linkList.remove(2);
+        linkList.remove(3);
+        linkList.nextOrder();
+        System.out.println("---长度--");
+        System.out.println("链表长度" + linkList.size());
+        System.out.println("查找a节点的位置" + linkList.find("a"));
+        System.out.println("查询aa节点的位置" + linkList.find("aa"));
     }
 
     /**
@@ -132,6 +205,12 @@ public class LinkList<T> {
             return next;
         }
 
+        public void setNext(Node<T> next) {
+            this.next = next;
+        }
 
+        public void setT(T t) {
+            this.t = t;
+        }
     }
 }
