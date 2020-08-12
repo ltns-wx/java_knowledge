@@ -1,9 +1,7 @@
-package cm.ltns.structure.linear_list_线性表.Statck;
+package cm.ltns.structure.linear_线性结构.Statck;
 
-import cm.ltns.structure.linear_list_线性表.common.Stack;
+import cm.ltns.structure.linear_线性结构.linearlist_线性表.common.Stack;
 
-import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Iterator;
 

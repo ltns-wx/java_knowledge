@@ -1,7 +1,6 @@
-package cm.ltns.structure.linear_list_线性表.common;
+package cm.ltns.structure.linear_线性结构.linearlist_线性表.common;
 
 public interface List<T> extends Iterable<T> {
-
     // 增加
     public void add(int index, T o);
     public void add( T o);
@@ -21,7 +20,7 @@ public interface List<T> extends Iterable<T> {
 
 
     //查找元素位置
-    int indexOf(Object o);
+    int indexOf(T o);
 
     // 长度
     public int size();

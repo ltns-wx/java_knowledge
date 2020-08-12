@@ -1,6 +1,4 @@
-package cm.ltns.structure.linear_list_线性表.ArrayLinearList;
-
-import java.util.Currency;
+package cm.ltns.structure.linear_线性结构.linearlist_线性表.ArrayLinearList_链式实现方式;
 
 public class LinkList<T> {
     //头指针

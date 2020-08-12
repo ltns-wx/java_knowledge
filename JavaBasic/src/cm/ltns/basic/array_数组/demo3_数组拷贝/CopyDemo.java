@@ -1,7 +1,6 @@
 package cm.ltns.basic.array_数组.demo3_数组拷贝;
 
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * 数组的拷贝：
@@ -25,10 +24,10 @@ public class CopyDemo {
          *  第五个参数：拷贝个数
          */
         String[] sourceArr = {"a", "b", "c", "d", "e", "f", "g"};
-        String[] targerArr = new String[10];
+        String[] tagerArr = new String[10];
 
-        System.arraycopy(sourceArr, 2, targerArr, 2, 4);
-        System.out.println("copy的数组：" + Arrays.toString(targerArr));
+        System.arraycopy(sourceArr, 2, tagerArr, 2, 4);
+        System.out.println("copy的数组：" + Arrays.toString(tagerArr));
 
     }
 

@@ -13,7 +13,7 @@ import java.util.List;
  *      2.排序的方法：compareTo(Object o1)
  *      3.触发排序：Collections.sort()
  *      4.所在的包：java.lang 包下
- * 二、Comparator 在 java.util包下
+ * 二、Comparator
  *      1.排序逻辑：排序逻辑在另一个实现类中
  *      2.排序方法：compare(Object o1, Object o2)
  *      3.触发排序：Collection.sort(List,Comparator)

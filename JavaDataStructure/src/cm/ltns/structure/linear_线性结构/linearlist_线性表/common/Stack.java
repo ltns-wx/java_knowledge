@@ -1,6 +1,4 @@
-package cm.ltns.structure.linear_list_线性表.common;
-
-import java.util.Iterator;
+package cm.ltns.structure.linear_线性结构.linearlist_线性表.common;
 
 public interface Stack<E> extends Iterable<E> {
 
