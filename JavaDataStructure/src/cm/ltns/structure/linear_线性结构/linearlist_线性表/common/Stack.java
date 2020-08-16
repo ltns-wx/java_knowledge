@@ -8,9 +8,9 @@ public interface Stack<E> extends Iterable<E> {
 
     public void push(E t);
     // 出栈
-    public E pop(E e);
+    public E pop();
     // 获取栈顶元素
-    public E peek(E e);
+    public E getHead();
 
     public void clear();
 
