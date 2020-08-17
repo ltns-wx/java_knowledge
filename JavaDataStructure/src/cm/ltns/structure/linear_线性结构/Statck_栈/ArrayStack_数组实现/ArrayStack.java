@@ -1,4 +1,4 @@
-package cm.ltns.structure.linear_线性结构.Statck.ArrayStack_数组实现;
+package cm.ltns.structure.linear_线性结构.Statck_栈.ArrayStack_数组实现;
 
 import cm.ltns.structure.linear_线性结构.linearlist_线性表.common.Stack;
 

@@ -3,7 +3,7 @@ package cm.ltns.structure.linear_线性结构.queue_队列.QueueArray_数组实�
 import java.lang.reflect.Array;
 
 /**
- * 使用数组实现队列：
+ * 使用数组实现队列：（first in  first out）
  * 头指针始终指向队列头元素的前一个位置，尾指针始终指向队列尾元素的位置
  */
 class ArrayQueue<T> {  // 使用泛型

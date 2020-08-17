@@ -1,7 +1,6 @@
-package cm.ltns.structure.linear_线性结构.Statck.ArrayStack_数组实现.demo;
+package cm.ltns.structure.linear_线性结构.Statck_栈.ArrayStack_数组实现.demo;
 
-import cm.ltns.structure.linear_线性结构.Statck.ArrayStack_数组实现.ArrayStack;
-import com.sun.org.apache.xpath.internal.operations.Or;
+import cm.ltns.structure.linear_线性结构.Statck_栈.ArrayStack_数组实现.ArrayStack;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
