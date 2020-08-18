@@ -1,20 +1,23 @@
 package cm.ltns.structure.linear_线性结构.linearlist_线性表.ArrayLinearList_链式实现方式;
 
-public class LinkList<T> {
+/**
+ * 单向链表 : head --> 1 --->2 ----3
+ *
+ */
+public class LinkSinglyList<T> {
     //头指针
-    private Node<T> head;
+    private Node head;
     // 单链表长度
     private int length;
 
     // 构造函数
-    public LinkList() {
-
-        head = new Node<T>(null);
-        length = 0;
+    public LinkSinglyList() {
+        head = new Node(null);
+        length = 0; //b不算头结点
     }
 
     //获取头结点地址
-    public Node<T> getHead() {
+    public Node getHead() {
         return head;
     }
 
@@ -24,25 +27,25 @@ public class LinkList<T> {
      * 二、找是指在post-1位置上的元素
      * 三、是指在post-1的节点的next = 新增加节点、 该节点的next就是next-1节点的next
      * <p>
-     * head--->a--->b---->c--->d
+     * head--->1--->2---->3--->4
      */
     public boolean add(T t, int pos) {
-        if (pos > length + 1 || pos < 1) {
+        if (pos > length+1  || pos < 1) {   // 第一个元素位置就是1 ， 头指针不算
             System.out.println("索引越界");
             return false;
         }
         // 查找 pos位置的元素
         int num = 1;
         // 插入位置的（n-1）的节点
-        Node<T> p = head;
+        Node p = head;
         // 插入位置的（n-1）的元素的下一个节点
-        Node<T> q = head.next;
+        Node q = head.next;
         while (num < pos) {
             p = q;
             q = p.next;
             num++;
         }
-        p.next = new Node<T>(t, q);
+        p.next = new Node(t, q);
         length++;
         return true;
     }
@@ -52,15 +55,15 @@ public class LinkList<T> {
         // 查找 pos位置的元素
         int num = 1;
         // 插入位置的（n-1）的节点
-        Node<T> p = head;
+        Node p = head;
         // 插入位置的（n-1）的元素的下一个节点
-        Node<T> q = head.next;
+        Node q = head.next;
         while (num <= length) {
             p = q;
             q = p.next;
             num++;
         }
-        p.next = new Node<T>(t, q);
+        p.next = new Node(t, q);
         length++;
         return true;
     }
@@ -77,8 +80,8 @@ public class LinkList<T> {
             return false;
         }
         int cur = 1;
-        Node<T> p = head;
-        Node<T> q = head.next;
+        Node p = head;
+        Node q = head.next;
         while (cur < pos) {
             p = q;
             q = p.next;
@@ -99,8 +102,8 @@ public class LinkList<T> {
             return null;
         }
         int cur = 1;
-        Node<T> p = head;
-        Node<T> q = head.next;
+        Node p = head;
+        Node q = head.next;
         // 获取指定位置上的元素
         while (cur < pos) {
             p = q;
@@ -117,7 +120,7 @@ public class LinkList<T> {
             return -1;
         }
         int cur = 1;
-        Node<T> p = head;
+        Node p = head;
         while (cur <= length) {
             p = p.next;
             if (p.getData().equals(t)) {
@@ -159,7 +162,7 @@ public class LinkList<T> {
     // 打印所有元素
     public void nextOrder() {
         if (head != null) {
-            Node<T> next = head.next;
+            Node next = head.next;
             while (next != null) {
                 System.out.println(next.getData());
                 next = next.next;
@@ -177,8 +180,8 @@ public class LinkList<T> {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        Node<T> p = head;
-        Node<T> q = head.next;
+        Node p = head;
+        Node q = head.next;
         sb.append("head=").append(head.getData());
         for (int i = 1; i <= length; i++) {
             sb.append("-->" + q.getData());
@@ -189,7 +192,7 @@ public class LinkList<T> {
     }
 
     public static void main(String[] args) {
-        LinkList<String> linkList = new LinkList<>();
+        LinkSinglyList<String> linkList = new LinkSinglyList<>();
 
         linkList.add("j", 3);
 
@@ -213,16 +216,16 @@ public class LinkList<T> {
      * 1.存储自身元素
      * 2.存储指向下一个元素的指针
      */
-    class Node<T> {
+    class Node {
         T t;
-        Node<T> next;
+        Node next;
 
-        public Node(T obj, Node<T> next) {
+        public Node(T obj, Node next) {
             this.t = obj;
             this.next = next;
         }
 
-        public Node(Node<T> node) {
+        public Node(Node node) {
             next = node;
         }
 
@@ -232,11 +235,11 @@ public class LinkList<T> {
         }
 
         // 下一个元素
-        public Node<T> getNext() {
+        public Node getNext() {
             return next;
         }
 
-        public void setNext(Node<T> next) {
+        public void setNext(Node next) {
             this.next = next;
         }
 
