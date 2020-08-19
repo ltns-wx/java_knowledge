@@ -16,6 +16,12 @@ import java.util.Objects;
  *      1.在默认新增：data[size]   // size表示元素的个数，和有效数据的下一个位置
  *      2.在指定位置（index=3）上新增：那么4以后的元素往后移动一位，即：data[6]=data[5], data[5]=data[4]
  *        这里index是数组索引位置上是3，例如data={1,2,3,4,5,6} index=3， 那么应该在3的后面新增加一个
+ *
+ *  线性表特性：
+ *      1、在线性表中逻辑上相邻的元素在物理存储位置上也相邻；
+ *      2.可按照数据元素的索引号进行随机存取，时间复杂度为O(1)；
+ *      3.插入、删除操作需要移动大量的元素，时间复杂度为O(n)；
+ *      4.需要预先分配存储空间，可能会造成空间浪费，但存储密度高，数据紧凑
  */
 public class ArrayLinearList<T> implements List<T> {
 
@@ -109,10 +115,10 @@ public class ArrayLinearList<T> implements List<T> {
         data[index] = o;
     }
 
-    // 删除指定索引 1,2, ,4,5,
+    // 删除 指定位置上的元素
     @Override
     public T remove(int index) {
-        if (index < 0 || index > data.length) {
+        if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("下标索引越界");
         }
         //获取将要删除的元素，并返回
@@ -128,7 +134,22 @@ public class ArrayLinearList<T> implements List<T> {
         size--;
         return temp;
     }
+    // 删除指定索引位置上的元素。
+    public T removeByIndex(int index){
+        // 判断索引的合法性
+        if (index < 0 || index > size-1) {
+            throw new IllegalArgumentException("下表索引越界");
+        }
+        // 判断是否扩容
 
+        T e = data[index];
+        // 元素需要往前移动
+        for (int i = index; i < size-1; i ++ ) {
+            data[i] = data[i +1];
+        }
+        size -- ;
+        return e;
+    }
 
 
     @Override
@@ -213,27 +234,7 @@ public class ArrayLinearList<T> implements List<T> {
 
         strings.add("b");
         strings.add(1, "c");
-        strings.add("d");
-        strings.add("e");
-        strings.add("f");
-        strings.add(3, "g");
-        strings.add("f");
-        strings.add("f");
-        strings.add("f");
-        strings.add("f");
-        Iterator<String> iterator = strings.iterator();
-        System.out.println("线性表长度" + strings.size());
-
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
-        strings.remove(1);
-        strings.remove(1);
-        strings.remove(1);
-        strings.remove(1);
-        strings.remove(1);
-        strings.remove(1);
-        strings.remove(1);
+        System.out.println(strings.toString());
         strings.remove(1);
         System.out.println(strings.toString());
     }
