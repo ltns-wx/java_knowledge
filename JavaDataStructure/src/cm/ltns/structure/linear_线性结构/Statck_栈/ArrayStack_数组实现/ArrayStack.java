@@ -5,8 +5,8 @@ import cm.ltns.structure.linear_线性结构.linearlist_线性表.common.Stack;
 import java.util.Iterator;
 
 /**
- *  栈：last in first out
- *  只允许一端进出，称为栈顶。另一端称为栈顶
+ * 栈：last in first out
+ * 只允许一端进出，称为栈顶。另一端称为栈顶
  */
 public class ArrayStack<T> implements Stack<T> {
 

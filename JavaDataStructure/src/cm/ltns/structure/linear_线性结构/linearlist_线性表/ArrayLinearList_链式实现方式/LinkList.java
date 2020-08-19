@@ -1,5 +1,10 @@
 package cm.ltns.structure.linear_线性结构.linearlist_线性表.ArrayLinearList_链式实现方式;
 
+/**
+ * 单向列表：
+ * <p>
+ * 一、主要是查出指定位置上的元素
+ */
 public class LinkList<T> {
     //头指针
     private Node<T> head;
@@ -191,8 +196,8 @@ public class LinkList<T> {
     public static void main(String[] args) {
         LinkList<String> linkList = new LinkList<>();
 
-        linkList.add("j", 3);
-
+        linkList.add("a");
+        linkList.add("b");
 
         System.out.println(linkList.toString());
         System.out.println("获取位置3的元素：" + linkList.value(3));

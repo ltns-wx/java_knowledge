@@ -91,7 +91,7 @@ public class ArrayLoopQueue<E> {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder(String.format("ArrayLoopQueue:%d%d[" + size,array.length-1));
+        StringBuilder stringBuilder = new StringBuilder(String.format("ArrayLoopQueue:%d,%d[" + size,array.length-1));
 
         if (isEmpty()){
             stringBuilder.append("]");
@@ -106,5 +106,15 @@ public class ArrayLoopQueue<E> {
             }
         }
         return  stringBuilder.toString();
+    }
+
+    public static void main(String[] args) {
+        ArrayLoopQueue<String> arrayLoopQueue = new ArrayLoopQueue<>();
+        arrayLoopQueue.offer("a");
+        arrayLoopQueue.offer("a");
+        arrayLoopQueue.offer("a");
+        arrayLoopQueue.offer("a");
+        arrayLoopQueue.offer("a");
+        System.out.println(arrayLoopQueue);
     }
 }
