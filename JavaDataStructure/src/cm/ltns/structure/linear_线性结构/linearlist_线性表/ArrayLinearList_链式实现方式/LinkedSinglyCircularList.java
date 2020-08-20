@@ -5,12 +5,12 @@ import sun.security.util.Length;
 import java.util.LinkedList;
 
 /**
- * 单向循环链表
+ * 单向循环链表： 该类头结点是真是你节点
+ *
+ * 一、没有head， 初始化的时候头指针和尾指针都是null
  */
 public class LinkedSinglyCircularList<E> {
 
-    // 头节点
-    private Node head;
     // 长度
     private int size;
 
@@ -24,113 +24,124 @@ public class LinkedSinglyCircularList<E> {
 
     // 构造函数
     public LinkedSinglyCircularList() {
-       head = null;
+        first = null;
+        last = null;
         size = 0;
     }
 
-    // 尾部插入
-//    public void addEnd(E e) {
-//        Node cur = this.head;
-//
-//        // 找出最后一个节点
-//        while (cur.next != this.head) {
-//            cur = cur.next;
-//        }
-//        Node node = new Node(e, null);
-//        if (size == 0) {
-//            head = node;
-//            node.next = head;
-//        } else {
-//            // 先把当前节点 赋给 新增加节点的下一个节点（这样就不会出现问题）
-//            node.next = cur.next;
-//            // 然后再把新节点赋给当前节点
-//            cur.next = node;
-//        }
-//        size++;
-//    }
-
-    // 头插法
-//    public void addStart(E e) {
-//        Node node = new Node(e, null);
-//        // 尾部节点
-//        Node cur = this.head;
-//        // 找出最后一个节点
-//        while (cur.next != this.head) {
-//            cur = cur.next;
-//        }
-//        if (size == 0) {
-//            head = node;
-//            node.next = head;
-//        } else {
-//            node.next = head;
-//            head = node;
-//            cur.next = head;
-//        }
-//        size++;
-//    }
-
-
-    //插入指定索引位置（相当于移动指针）
+    //任意位置插入，根据索引位置（索引位置为0， 那么就是放在头部）
     public boolean addIndex(int index, E data) {
-        if (index < 0 || index > size + 1) {
+        if (index < 0 || index > size) {
             System.out.println("下标索引越界");
         }
-        Node lastNode = head;    // 尾部节点
-        for (int i = 0; i < size; i++) {
-            lastNode = lastNode.next;
-        }
         Node node = new Node(data, null);
-        boolean isEmpty = size == 0 && head == null && lastNode == null;
-        if (isEmpty) {
-            head = node;
-            lastNode = node;
-            lastNode.next = head;
-        } else if (index == 0) {
-            node.next = head;
-            head = node;
-            lastNode.next = head;
-        } else if (index == size) { // 表尾添加元素
-            node.next = lastNode.next;
-            lastNode.next = node;
-            lastNode = node;   // 类似于指针移动
-        }else{
-            Node p = head ;
-            for (int i = 0; i < index-1; i++) {
-                p = p.next;
+        // 插入分情况
+        if (isEmpty()) {
+            first = node;   // 头指针指向第一个元素
+            last = node;    // 尾指针指向第一个元素
+            node.next = node;   // 让第一个元素形成一个环
+        } else if (index == 0) { // 头插入：
+            node.next = first;
+            first = node;
+            last.next = first;
+        } else if (index == size) { //尾部插入
+            last.next = node;
+            last = node;
+            node.next = first;
+        } else {  // 中间插入
+            // 查到索引位置上的元素
+            Node curNode = first;
+            int cur = 1;
+            while (cur < index - 1) {
+                curNode = first.next;
             }
-            node.next =p.next;
-            p.next =node ;
+            node.next = curNode.next;
+            curNode.next = node;
         }
         size++;
         return true;
     }
-    // 指定索引
 
-    // 删除
+    // 判断是否为null
+    public boolean isEmpty() {
+        if (size == 0 && first == null && last == null) {
+            return true;
+        }
+        return false;
+    }
 
-
-    //插叙
-
+    // 删除指定索引位置上的节点
+    public E remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("删除角标非法");
+        }
+        // 判断循环列表是否为空
+        if (isEmpty()) {
+            System.out.println("该链表为null");
+            return null;
+        }
+        E e = null;
+        if (size == 1) {
+            first = null;
+            last = null;
+        } else if (index == 0) {    // 删除头结点
+            e = first.getData();
+            first = first.next;
+            last.next = first;
+        } else if (index == size-1) { // 删除尾节点
+            Node cur = first;
+            while (cur.next != last) {
+                cur = cur.next;
+            }
+            e = cur.next.data;
+            cur.next = first;
+            last = cur;
+        } else {    // 删除其他位置
+            Node curNode = first;
+            int cur = 0;
+            while (cur < index - 1) {
+                curNode = curNode.next; // 要删除节点的前一个
+            }
+            e = curNode.next.data;
+            curNode.next = curNode.next.next;
+        }
+        size--;
+        return e;
+    }
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-        Node p = head;
-        Node q = head.next;
-        sb.append("head=").append(head.getData());
-        for (int i = 1; i < size; i++) {
-            sb.append("-->" + q.getData());
-            p = q;
-            q = p.getNext();
+        StringBuilder sb = new StringBuilder();
+        sb.append("LinkedSinglyCircularList:size=" + size);
+        if (isEmpty()) {//判空
+            sb.append("[]");
+        } else {
+            sb.append("[");
+            Node p = first;
+            while (true) {
+                sb.append(p.getData());
+                if (p.next == first) {
+                    sb.append(']');
+                    break;
+                } else {
+                    sb.append(',');
+                }
+                p = p.next;
+            }
         }
         return sb.toString();
+
     }
 
     public static void main(String[] args) {
         LinkedSinglyCircularList<String> linkedSinglyCircularList = new LinkedSinglyCircularList();
-        linkedSinglyCircularList.addIndex(0,"a");
-        linkedSinglyCircularList.addIndex(0,"b");
-        linkedSinglyCircularList.addIndex(2,"c");
+        linkedSinglyCircularList.addIndex(0, "a");
+        linkedSinglyCircularList.addIndex(0, "b");
+        linkedSinglyCircularList.addIndex(2, "c");  // 索引位置
+        linkedSinglyCircularList.addIndex(1, "e");  // 索引位置
+        System.out.println(linkedSinglyCircularList);
+        linkedSinglyCircularList.remove(0);
+        linkedSinglyCircularList.remove(2);
         System.out.println(linkedSinglyCircularList);
 
     }
