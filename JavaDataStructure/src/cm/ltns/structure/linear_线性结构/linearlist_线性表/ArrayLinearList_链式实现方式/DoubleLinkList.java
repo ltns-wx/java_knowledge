@@ -12,14 +12,14 @@ public class DoubleLinkList<E> {
     // 长度
     private int size;
 
+    /**
+     * 头结点不存储值 并且头结点初始化时 就一个头结点。
+     * 所以头结点的前后节点都是自己
+     * 并且这个链表的长度为0；
+     */
     public DoubleLinkList() {
-        /**
-         * 头结点不存储值 并且头结点初始化时 就一个头结点。
-         * 所以头结点的前后节点都是自己
-         * 并且这个链表的长度为0；
-         */
         head = null;
-        tail = head;
+        tail = null;
         size = 0;
     }
 
@@ -37,54 +37,25 @@ public class DoubleLinkList<E> {
             node.next = head;
             head.pre = node;
             head = node;
-        } else if(size == index){  //插入链表尾部
-            tail.next=node;
-            node.pre=tail;
-            tail=node;
-        }else {
+        } else if (size == index) {  //插入链表尾部
+            tail.next = node;
+            node.pre = tail;
+            tail = node;
+        } else {
             Node curNode = head;
             int cur = 0;
             while (cur < index - 1) {
                 curNode = curNode.next;
-                cur ++;
+                cur++;
             }
-            node.pre = curNode;
-            node.next = curNode.next;
-            curNode.next = node;
-            curNode.pre = node;
+            node.next=curNode.next;
+            curNode.next.pre=node;
+            curNode.next=node;
+            node.pre=curNode;
         }
         size++;
     }
 
-    /**
-     * 插入节点
-     */
-    public void inesert(int index, E value) {
-        //如果这次插入时 链表是空的
-        if (index == 0) {
-            //这个节点的
-            Node cur = new Node(value, head, head.pre);
-            head.pre.next = cur;
-            head.pre = cur;
-            size++;
-            return;
-        }
-        /**
-         * 先根据给出的插入位置 找到该链表原来在此位置的节点
-         */
-        Node node = getNode(index);
-        /**
-         *放置的位置的前一个节点就是原节点的前置节点 而后节点就是原节点
-         */
-        Node cur = new Node(value, node.next, node);
-        /**
-         * 现将该位置也就是 原节点的前节点的后节点 赋值成为新节点
-         * 然后将新节点的后置节点的值赋值成为原节点
-         */
-        node.next.pre = cur;
-        node.next = cur;
-        size++;
-    }
 
     public int getSize() {
         return this.size;
@@ -118,22 +89,8 @@ public class DoubleLinkList<E> {
         /**
          * 当索引的值小于该链表长度的一半时，那么从链表的头结点开始向后找是最快的
          */
-        if (index < size / 2) {
-            Node cur = head.pre;
-            for (int i = 0; i < index; i++) {
-                cur = cur.pre;
-            }
-            return cur;
-        }
-        /**
-         * 当索引值位于链表的后半段时，则从链表的另端开始找是最快的
-         */
-        /**
-         * 此
-         */
-        Node cur = head.next;
-        int newIndex = size - (index + 1);
-        for (int i = 0; i < newIndex; i++) {
+        Node cur = head;
+        for (int i = 0; i < index; i++) {
             cur = cur.next;
         }
         return cur;
@@ -164,7 +121,7 @@ public class DoubleLinkList<E> {
      * 向表头插入数据
      */
     public void insertTo(E Value) {
-        inesert(0, Value);
+        add(0, Value);
     }
 
     /**
@@ -182,29 +139,42 @@ public class DoubleLinkList<E> {
     /**
      * 删除节点的方法
      */
-    public void del(int index) {
+    public void remove(int index) {
         checkIndex(index);
         Node cur = getNode(index);
-        //记住此时的指针还没断开 赋值以后才相当于断开
-        cur.next.pre = cur.pre;
-        cur.pre.next = cur.next;
-        size--;
-        cur = null;
-        return;
+        System.out.println("将要删除的节点" + cur.getE());
+        if (0 == index){  // 删除头结点
+            head = head.next;
+            head.pre=null;
+            size--;
+        }else if (index == size-1){ // 删除尾结点
+            tail.pre.next=null;
+            tail = tail.pre;
+            size--;
+        }else {
+            //记住此时的指针还没断开 赋值以后才相当于断开
+            cur.pre.next = cur.next;
+            cur.next.pre = cur.pre;
+            cur.pre=null;
+            cur.next=null;
+            size--;
+            cur = null;
+        }
+
     }
 
     /**
      * 删除第一个节点
      */
     public void delFirst() {
-        del(0);
+        remove(0);
     }
 
     /**
      * 删除最后一个节点
      */
     public void delLast() {
-        del(size - 1);
+        remove(size - 1);
     }
 
     @Override
@@ -232,6 +202,14 @@ public class DoubleLinkList<E> {
         doubleLinkList.add(2, "c");
         doubleLinkList.add(2, "d");
         System.out.println(doubleLinkList.toString());
+
+        DoubleLinkList.Node node = (DoubleLinkList.Node) doubleLinkList.getNode(3);
+        System.out.println(node.getE());
+
+        // 删除
+        doubleLinkList.remove(2);
+        System.out.println(doubleLinkList);
+
     }
 
 
