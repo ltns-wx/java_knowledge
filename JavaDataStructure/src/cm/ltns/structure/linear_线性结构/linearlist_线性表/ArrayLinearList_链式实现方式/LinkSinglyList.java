@@ -1,7 +1,11 @@
 package cm.ltns.structure.linear_线性结构.linearlist_线性表.ArrayLinearList_链式实现方式;
 
 /**
- * 单向链表 : head --> 1 --->2 ----3
+ * 单向链表 ：
+ *    一、头结点是指链表中的第一个节点，有真是节点和虚拟节点之分
+ *        真是节点：第一个节点用于存放数据（如果是虚拟节点，那么创建LinkSinglyList对象的时候，head==null）
+ *        虚拟节点：第一个节点不允许存放数据。
+ *        本类使用的是虚拟节点。
  *
  */
 public class LinkSinglyList<T> {
@@ -193,7 +197,8 @@ public class LinkSinglyList<T> {
 
     public static void main(String[] args) {
         LinkSinglyList<String> linkList = new LinkSinglyList<>();
-
+        linkList.add("a", 1);
+        linkList.add("b", 2);
         linkList.add("j", 3);
 
 
