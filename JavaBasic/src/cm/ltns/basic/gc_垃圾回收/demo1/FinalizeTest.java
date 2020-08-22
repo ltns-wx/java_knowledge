@@ -18,16 +18,16 @@ public class FinalizeTest {
         System.gc();
         /**
          * 睡眠2s：
-         * 这里当程序调用System.gc()后，系统并没有立即进行垃圾回收，而是有一定的时间差
+         * 这里当程序调用System.gc()后，系统并没有立即进行垃圾回收，而是有一定的时间差,所以可能会出现空指针异常。
          * 等待两秒，程序暂停，垃圾回收机制也收到了通知，因此开始进行垃圾回收，调用finalize()方法
          *
          * 除此之外，System和Runtime类里都提供了一个runFinalization方法，可以强制垃圾回收机制进行垃圾回收
          * 因此，我们可以不需要让程序等待两秒，如下面例子
          *
          */
-//        Thread.sleep(2000);
+        Thread.sleep(2000);
         // 强制垃圾回收机制进行垃圾回收，调用finalize()方法
-        System.runFinalization();
+//        System.runFinalization();
         finalizeTest.info();
     }
     public void finalize(){
