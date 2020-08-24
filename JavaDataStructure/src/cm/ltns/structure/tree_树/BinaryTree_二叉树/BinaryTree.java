@@ -4,23 +4,22 @@ package cm.ltns.structure.tree_树.BinaryTree_二叉树;
  * 二叉树
  * 一、二叉树的前序（DLP）、中序(LDR)、后续遍历(LRD)
  * 深度查询
- *  前序遍历
- *      1.先输出当前节点（root）
- *      2.如果左节点不为空，则继续递归遍历前序遍历
- *      3.如果有节点不为空，则递归继继续前序遍历
- *  中序遍历
- *      1.如果当前节点的左节点不为空，则递归中序遍历
- *      2.输出当前节点
- *      3.如果当前节点的右节点不为空，则递归中序遍历
- *  后续遍历
- *      1.如果当前节点的左子节点不为空，则递归后续遍历
- *      2.如果当前节点的右子节点不为空，则递归后续遍历
- *      3.输出当前节点
- *
+ * 前序遍历
+ * 1.先输出当前节点（root）
+ * 2.如果左节点不为空，则继续递归遍历前序遍历
+ * 3.如果有节点不为空，则递归继继续前序遍历
+ * 中序遍历
+ * 1.如果当前节点的左节点不为空，则递归中序遍历
+ * 2.输出当前节点
+ * 3.如果当前节点的右节点不为空，则递归中序遍历
+ * 后续遍历
+ * 1.如果当前节点的左子节点不为空，则递归后续遍历
+ * 2.如果当前节点的右子节点不为空，则递归后续遍历
+ * 3.输出当前节点
+ * <p>
  * 广度优先遍历：从左到右，使用队列实现
- *      1.先把根节点放到队列中
- *      2.根据出一个节点，再把其对应的左右子节点放进队列中
- *
+ * 1.先把根节点放到队列中
+ * 2.根据出一个节点，再把其对应的左右子节点放进队列中
  */
 public class BinaryTree<E> {
 
@@ -71,21 +70,20 @@ public class BinaryTree<E> {
     }
 
     // 删除二叉树的左子数
-    public void deleteLeft(Node parent){
-        if (parent == null){
+    public void deleteLeft(Node parent) {
+        if (parent == null) {
             System.out.println("该结点为空");
-        }else {
+        } else {
             parent.left = null;  // 这样不会导致空间浪费吗？
         }
 
     }
 
 
-
     // 前序遍历DLR
     public void orderDLR(Node node) {  //node为根节点
         if (node == null) {
-            System.out.println("该二叉树为null");
+            return;
         }
         System.out.println(node.data);
         orderDLR(node.left);

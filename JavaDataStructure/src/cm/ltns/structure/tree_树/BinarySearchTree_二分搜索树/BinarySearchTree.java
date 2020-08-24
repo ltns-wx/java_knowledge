@@ -1,8 +1,13 @@
 package cm.ltns.structure.tree_树.BinarySearchTree_二分搜索树;
 
+import cm.ltns.structure.tree_树.BinaryTree_二叉树.BinaryTree;
+
+/**
+ * 二分搜索树
+ */
 public class BinarySearchTree<E extends Comparable<E>> {
 
-    private Node root;
+    Node root;
     private int size;
 
     public BinarySearchTree() {
@@ -34,11 +39,111 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     }
 
+    // 前序遍历DLR
+    public void orderDLR(Node node) {  //node为根节点
+        if (node == null) {
+            return;
+        }
+        System.out.println(node.date);
+        orderDLR(node.leftChild);
+        orderDLR(node.rightChild);
+    }
+    // 层序遍历
+
+    // 删除最小节点
+    public E removeMin() {
+        E e = minNum();
+        root = removeMin(root);
+        return e;
+    }
+
+    // 删除指定元素
+    private Node remove(Node node, E e) {
+        if (node == null) {
+            return null;
+        }
+        if (e.compareTo(node.date) < 0) {
+            node.leftChild = remove(node, e);
+            return node;
+        } else if (e.compareTo(node.date) > 0) {
+            node.rightChild = remove(node, e);
+            return node;
+        } else {
+            // 如果左子树
+            if (node.leftChild == null) {
+                Node rightNode = node.rightChild;
+                node.rightChild = null;
+                size--;
+                return rightNode;
+            }
+            // 如果又子树为null
+            if (node.rightChild == null) {
+                Node leftNode = node.leftChild;
+                node.leftChild = null;
+                size--;
+                return leftNode;
+            }
+            // 要么是左子树的最大值来顶替， 要么是右子树的最小值来顶替
+
+            // 查找右子树的最小值
+            Node minNode = minNum(node);
+            minNode.rightChild = removeMin(node.rightChild);
+            minNode.leftChild = node.leftChild;
+            node.leftChild = null;
+            node.rightChild = null;
+            node.date = null;
+            return minNode;
+        }
+    }
+
+    // 已node为节点的二分搜索树中删除最小值，并返回新书的跟
+    private Node removeMin(Node node) {
+        if (node.leftChild == null) {
+            Node rightNode = node.rightChild;
+            node.leftChild = null;
+            size--;
+            return rightNode;
+        }
+        node.leftChild = removeMin(node.leftChild);
+        return node;
+    }
+
+    // 获取最小值
+    public E minNum() {
+        Node minnum = minNum(root);
+        return minnum.date;
+    }
+
+
+    private Node minNum(Node node) {
+        if (node.leftChild == null) {
+            return node;
+        }
+        return minNum(node.leftChild);
+    }
+
     // 包含
     public boolean contains(E data) {
         return contains(root, data);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        inOrderByString(root, sb);
+        return sb.toString();
+    }
+
+    private void inOrderByString(Node node, StringBuilder stringBuilder) {
+        if (node == null) {
+            return;
+        }
+        inOrderByString(node.leftChild, stringBuilder);
+        stringBuilder.append(node.date);
+        inOrderByString(node.rightChild, stringBuilder);
+    }
+
+    // 是否包含
     private boolean contains(Node node, E data) {
         if (node == null) {
             return false;
@@ -53,16 +158,6 @@ public class BinarySearchTree<E extends Comparable<E>> {
         }
     }
 
-    public static void main(String[] args) {
-        BinarySearchTree<Integer> binarySearchTree = new BinarySearchTree<>();
-        binarySearchTree.add(4);
-        binarySearchTree.add(3);
-        binarySearchTree.add(5);
-        binarySearchTree.add(1);
-        binarySearchTree.add(2);
-        binarySearchTree.add(6);
-        System.out.println(binarySearchTree);
-    }
 
     // 结点
     class Node {
@@ -106,6 +201,12 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
         public void setRightChild(Node rightChild) {
             this.rightChild = rightChild;
+        }
+
+        @Override
+        protected void finalize() throws Throwable {
+            System.out.println(this.date + "被收回");
+            super.finalize();
         }
     }
 

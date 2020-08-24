@@ -1,7 +1,7 @@
 package cm.ltns.structure.linear_线性结构.linearlist_线性表.ArrayLinearList_链式实现方式;
 
 /**
- * 这种事有head头的
+ * 这种是有head头的
  */
 public class MyHeadSingleList {
     class Node {  //内部节点类
