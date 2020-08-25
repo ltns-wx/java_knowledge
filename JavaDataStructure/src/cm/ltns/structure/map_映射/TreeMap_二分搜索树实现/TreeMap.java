@@ -46,6 +46,84 @@ public class TreeMap<K extends Comparable<K>, V> {
         return node;
     }
 
+    // 删除指定节点
+    public V remove(K key) {
+        // 获取将要删除的节点
+        Node delNode = getNode(root, key);
+        if (delNode != null) {
+            remove(root, key);
+        }
+        return null;
+    }
+
+    private Node remove(Node node, K key) {
+        if (key.compareTo(node.key) < 0) {
+            node.leftChild = remove(node.leftChild, key);
+            return node;
+        } else if (key.compareTo(node.key) > 0) {
+            node.rightChild = remove(node.rightChild, key);
+            return node;
+        } else {  // 找到要删除的节点
+            if (node.leftChild == null) {
+                Node right = node.rightChild;
+                node.rightChild = null;
+                size--;
+                return right;
+            }
+            if (node.rightChild == null) {
+                Node left = node.leftChild;
+                node.leftChild = null;
+                size--;
+                return node;
+            }
+
+            // 都不为空；
+            Node successor = minnum(root.rightChild);
+            successor.rightChild = removeMin(node.rightChild);
+            successor.leftChild = node.leftChild;
+            node.leftChild = node.rightChild = null;
+            return successor;
+        }
+    }
+
+    // 查找最小值
+    public Node minnum(Node node) {
+        if (node.leftChild == null) {
+            return node;
+        }
+        return minnum(node.leftChild);
+    }
+
+    // 删除最小值
+    private Node removeMin(Node node) {
+        if (node.leftChild == null) {
+            Node right = node.rightChild;
+            node.rightChild = null;
+            size--;
+            return right;
+        }
+        node.leftChild = removeMin(node.leftChild);
+        return node;
+    }
+
+    // 查询节点
+    public V get(K key) {
+        Node n = getNode(root, key);
+        return n == null ? null : n.value;
+    }
+
+    public boolean contains(K key) {
+        return getNode(root, key) != null;
+    }
+
+    public void set(K key, V value){
+        Node n = getNode(root,key);
+        if (n == null){
+            System.out.println("key值不存在");
+        }
+        n.value = value;
+    }
+
     // 节点
     class Node {
         K key;
@@ -66,5 +144,13 @@ public class TreeMap<K extends Comparable<K>, V> {
             this.leftChild = null;
             this.rightChild = null;
         }
+    }
+
+    public static void main(String[] args) {
+        String s = "aa";
+        String s1 = "aa";
+        int i = s.hashCode();
+        System.out.println(i);
+        System.out.println(s1.hashCode());
     }
 }
