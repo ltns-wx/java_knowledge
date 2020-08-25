@@ -142,6 +142,8 @@ public class LinkedSinglyCircularList<E> {
         System.out.println(linkedSinglyCircularList);
         linkedSinglyCircularList.remove(0);
         linkedSinglyCircularList.remove(2);
+        System.gc();
+        System.runFinalization();
         System.out.println(linkedSinglyCircularList);
 
     }
@@ -174,6 +176,11 @@ public class LinkedSinglyCircularList<E> {
 
         public void setNext(Node next) {
             this.next = next;
+        }
+
+        @Override
+        protected void finalize() throws Throwable {
+            System.out.println(this.data + "该元素即将被删除");
         }
 
         @Override

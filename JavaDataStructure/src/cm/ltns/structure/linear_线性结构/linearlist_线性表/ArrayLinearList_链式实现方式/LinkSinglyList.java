@@ -92,6 +92,8 @@ public class LinkSinglyList<T> {
             cur++;
         }
         p.setNext(p.next);
+        p.next = null;
+        length -- ;
         return false;
     }
 
@@ -207,6 +209,7 @@ public class LinkSinglyList<T> {
         linkList.nextOrder();
         System.out.println("---移除---");
         linkList.remove(2);
+        System.runFinalization();
         linkList.remove(3);
         linkList.nextOrder();
         System.out.println("---长度--");
@@ -250,6 +253,11 @@ public class LinkSinglyList<T> {
 
         public void setT(T t) {
             this.t = t;
+        }
+
+        @Override
+        protected void finalize() throws Throwable {
+            System.out.println(">>>即将被删除的节点" + this.t);
         }
     }
 }
